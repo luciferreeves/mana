@@ -1,4 +1,5 @@
 package lexer
+
 import "mana/tokens"
 
 type Lexer struct {
@@ -10,7 +11,7 @@ type Lexer struct {
 
 // New returns a new Lexer instance.
 func New(input string) *Lexer {
-	l := &Lexer{input: input}
+	var l *Lexer = &Lexer{input: input}
 	l.readChar()
 	return l
 }
@@ -24,9 +25,9 @@ func (l *Lexer) NextToken() tokens.Token {
 	switch l.ch {
 	case '=':
 		if l.peekChar() == '=' {
-			ch := l.ch
+			var ch byte = l.ch
 			l.readChar()
-			literal := string(ch) + string(l.ch)
+			var literal string = string(ch) + string(l.ch)
 			tok = tokens.Token{Type: tokens.EQ, Literal: literal}
 		} else {
 			tok = newToken(tokens.ASSIGN, l.ch)
@@ -45,9 +46,9 @@ func (l *Lexer) NextToken() tokens.Token {
 		tok = newToken(tokens.GT, l.ch)
 	case '!':
 		if l.peekChar() == '=' {
-			ch := l.ch
+			var ch byte = l.ch
 			l.readChar()
-			literal := string(ch) + string(l.ch)
+			var literal string = string(ch) + string(l.ch)
 			tok = tokens.Token{Type: tokens.NOT_EQ, Literal: literal}
 		} else {
 			tok = newToken(tokens.BANG, l.ch)
@@ -80,7 +81,7 @@ func (l *Lexer) NextToken() tokens.Token {
 			tok = newToken(tokens.ILLEGAL, l.ch)
 		}
 	}
-	
+
 	l.readChar()
 	return tok
 }
@@ -129,7 +130,7 @@ func (l *Lexer) peekChar() byte {
 
 // readIdentifier reads an identifier and advances the position in the input string until it encounters a non-letter character.
 func (l *Lexer) readIdentifier() string {
-	position := l.position
+	var position int = l.position
 	for isLetter(l.ch) {
 		l.readChar()
 	}
@@ -138,7 +139,7 @@ func (l *Lexer) readIdentifier() string {
 
 // readNumber reads a number and advances the position in the input string until it encounters a non-digit character.
 func (l *Lexer) readNumber() string {
-	position := l.position
+	var position int = l.position
 	for isDigit(l.ch) {
 		l.readChar()
 	}

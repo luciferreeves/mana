@@ -6,7 +6,7 @@ import (
 )
 
 func TestNextToken(t *testing.T) {
-	input := `
+	const input string = `
 		let five = 5;
 		let ten = 10;
 
@@ -29,7 +29,7 @@ func TestNextToken(t *testing.T) {
 		10 != 9;
 	`
 
-	tests := []struct {
+	var tests = []struct {
 		expectedType    tokens.TokenType
 		expectedLiteral string
 	}{
@@ -109,10 +109,11 @@ func TestNextToken(t *testing.T) {
 		{tokens.EOF, ""},
 	}
 
-	l := New(input)
+
+	var l *Lexer = New(input)
 
 	for i, tt := range tests {
-		tok := l.NextToken()
+		var tok tokens.Token = l.NextToken()
 
 		if tok.Type != tt.expectedType {
 			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q",
