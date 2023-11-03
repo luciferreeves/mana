@@ -63,3 +63,14 @@ func (rs *ReturnStatement) statementNode() {}
 func (rs *ReturnStatement) TokenLiteral() string {
 	return rs.Token.Literal
 }
+
+// ExpressionStatement represents an expression statement.
+type ExpressionStatement struct {
+	Token      tokens.Token // the first token of the expression
+	Expression Expression
+}
+
+func (es *ExpressionStatement) statementNode() {}
+func (es *ExpressionStatement) TokenLiteral() string {
+	return es.Token.Literal
+}
