@@ -128,3 +128,17 @@ func (es *ExpressionStatement) String() string {
 	}
 	return ""
 }
+
+// IntegerLiteral represents an integer literal.
+type IntegerLiteral struct {
+	Token tokens.Token // the token.INT token
+	Value int64
+}
+
+func (il *IntegerLiteral) expressionNode() {}
+func (il *IntegerLiteral) TokenLiteral() string {
+	return il.Token.Literal
+}
+func (il *IntegerLiteral) String() string {
+	return il.Token.Literal
+}
