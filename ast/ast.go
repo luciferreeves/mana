@@ -129,6 +129,28 @@ func (es *ExpressionStatement) String() string {
 	return ""
 }
 
+// PrefixExpression represents a prefix expression.
+type PrefixExpression struct {
+	Token    tokens.Token // the prefix token, e.g. !
+	Operator string
+	Right    Expression
+}
+
+func (pe *PrefixExpression) expressionNode() {}
+func (pe *PrefixExpression) TokenLiteral() string {
+	return pe.Token.Literal
+}
+func (pe *PrefixExpression) String() string {
+	var out bytes.Buffer
+
+	out.WriteString("(")
+	out.WriteString(pe.Operator)
+	out.WriteString(pe.Right.String())
+	out.WriteString(")")
+
+	return out.String()
+}
+
 // IntegerLiteral represents an integer literal.
 type IntegerLiteral struct {
 	Token tokens.Token // the token.INT token

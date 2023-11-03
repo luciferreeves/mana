@@ -115,7 +115,7 @@ func (p *Parser) parseIdentifier() ast.Expression {
 
 // parseIntegerLiteral parses an integer literal.
 func (p *Parser) parseIntegerLiteral() ast.Expression {
-	var lit *ast.IntegerLiteral = &ast.IntegerLiteral{ Token: p.curToken }
+	var lit *ast.IntegerLiteral = &ast.IntegerLiteral{Token: p.curToken}
 
 	var value, err = strconv.ParseInt(p.curToken.Literal, 0, 64)
 	if err != nil {
