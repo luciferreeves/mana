@@ -1,9 +1,9 @@
 package parser
 
 import (
-	"testing"
 	"mana/ast"
 	"mana/lexer"
+	"testing"
 )
 
 func TestLetStatements(t *testing.T) {
@@ -89,7 +89,6 @@ func testLetStatement(t *testing.T, s ast.Statement, name string) bool {
 
 	return true
 }
-
 
 // Return statement tests.
 func TestReturnStatements(t *testing.T) {

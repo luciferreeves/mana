@@ -1,8 +1,8 @@
 package lexer
 
 import (
-	"testing"
 	"mana/tokens"
+	"testing"
 )
 
 func TestNextToken(t *testing.T) {
@@ -108,7 +108,6 @@ func TestNextToken(t *testing.T) {
 		{tokens.SEMICOLON, ";"},
 		{tokens.EOF, ""},
 	}
-
 
 	var l *Lexer = New(input)
 

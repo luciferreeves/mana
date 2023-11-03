@@ -20,7 +20,7 @@ type Parser struct {
 // New returns a new Parser.
 func New(l *lexer.Lexer) *Parser {
 	var p *Parser = &Parser{
-		l: l,
+		l:      l,
 		errors: []string{},
 	}
 
@@ -147,4 +147,3 @@ func (p *Parser) peekError(t tokens.TokenType) {
 
 	p.errors = append(p.errors, msg)
 }
-

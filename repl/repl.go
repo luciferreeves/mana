@@ -17,7 +17,7 @@ func Start(in io.Reader, out io.Writer) {
 	for {
 		fmt.Fprint(out, PROMPT)
 		var scanned bool = scanner.Scan()
-		
+
 		if !scanned {
 			return
 		}

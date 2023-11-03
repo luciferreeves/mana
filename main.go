@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"mana/repl"
 	"os"
 	"os/user"
-	"mana/repl"
 )
 
 func main() {
