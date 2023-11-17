@@ -65,6 +65,8 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerPrefix(tokens.INT, p.parseIntegerLiteral)
 	p.registerPrefix(tokens.BANG, p.parsePrefixExpression)
 	p.registerPrefix(tokens.MINUS, p.parsePrefixExpression)
+	p.registerPrefix(tokens.TRUE, p.parseBoolean)
+	p.registerPrefix(tokens.FALSE, p.parseBoolean)
 
 	// Initialize the infix parse functions.
 	p.infixParseFns = make(map[tokens.TokenType]infixParseFn)
@@ -137,9 +139,14 @@ func (p *Parser) parseIdentifier() ast.Expression {
 	return &ast.Identifier{Token: p.curToken, Value: p.curToken.Literal}
 }
 
+// parseBoolean parses a boolean.
+func (p *Parser) parseBoolean() ast.Expression {
+	return &ast.Boolean{Token: p.curToken, Value: p.curTokenIs(tokens.TRUE)}
+}
+
 // parseIntegerLiteral parses an integer literal.
 func (p *Parser) parseIntegerLiteral() ast.Expression {
-	defer untrace(trace("parseIntegerLiteral"))
+	// defer untrace(trace("parseIntegerLiteral"))
 
 	var lit *ast.IntegerLiteral = &ast.IntegerLiteral{Token: p.curToken}
 
@@ -197,7 +204,7 @@ func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
 
 // parseExpressionStatement parses an expression statement.
 func (p *Parser) parseExpressionStatement() *ast.ExpressionStatement {
-	defer untrace(trace("parseExpressionStatement"))
+	// defer untrace(trace("parseExpressionStatement"))
 
 	var stmt *ast.ExpressionStatement = &ast.ExpressionStatement{Token: p.curToken}
 
@@ -219,7 +226,7 @@ func (p *Parser) noPrefixParseFnError(t tokens.TokenType) {
 
 // parseExpression parses an expression.
 func (p *Parser) parseExpression(precedence int) ast.Expression {
-	defer untrace(trace("parseExpression"))
+	// defer untrace(trace("parseExpression"))
 
 	prefix := p.prefixParseFns[p.curToken.Type]
 
@@ -248,7 +255,7 @@ func (p *Parser) parseExpression(precedence int) ast.Expression {
 
 // parsePrefixExpression parses a prefix expression.
 func (p *Parser) parsePrefixExpression() ast.Expression {
-	defer untrace(trace("parsePrefixExpression"))
+	// defer untrace(trace("parsePrefixExpression"))
 
 	var expression *ast.PrefixExpression = &ast.PrefixExpression{
 		Token:    p.curToken,
@@ -264,7 +271,7 @@ func (p *Parser) parsePrefixExpression() ast.Expression {
 
 // parseInfixExpression parses an infix expression.
 func (p *Parser) parseInfixExpression(left ast.Expression) ast.Expression {
-	defer untrace(trace("parseInfixExpression"))
+	// defer untrace(trace("parseInfixExpression"))
 
 	expression := &ast.InfixExpression{
 		Token:    p.curToken,
