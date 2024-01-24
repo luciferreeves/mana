@@ -5,8 +5,7 @@ Interpreted Toy Programming Language written in Go -->
 
 Mana is a toy programming language written in Go. It is a dynamically typed, interpreted language with a C-like syntax. 
 
-
-> **Note**: The language is still in development and is not yet usable. The documentation below is a work in progress and is subject to change.
+> *Note*: The language is still in development and is not yet usable. The documentation below is a work in progress and is subject to change.
 
 ## Development Roadmap
 
@@ -35,7 +34,7 @@ Mana is a toy programming language written in Go. It is a dynamically typed, int
 
 Mana will come with a REPL (Read-Eval-Print-Loop) that can be used to evaluate Mana code.
 
-> **Note**: The REPL is still in development and is not yet usable. Currently, it can only parse and print the AST of the input code.
+> *Note*: The REPL is still in development and is not yet usable. Currently, it can only parse and print the AST of the input code.
 
 ## Syntax
 
@@ -62,3 +61,64 @@ let result = if (x < y) {
     subtract(x, y) 
 }; // result = 15
 ```
+
+## Types
+
+Mana is a dynamically typed language. This means that the type of a variable is determined at runtime. The following are the types that Mana supports:
+
+| Type | Description | Example |
+| --- | --- | --- |
+| `Integer` | A 64-bit signed integer | `5` |
+| `Boolean` | A boolean value | `true` |
+
+## Operators
+
+Mana supports the following operators:
+
+| Operator | Description | Example |
+| --- | --- | --- |
+| `+` | Addition | `5 + 5` |
+| `-` | Subtraction | `5 - 5` |
+| `*` | Multiplication | `5 * 5` |
+| `/` | Division | `5 / 5` |
+| `!` | Logical NOT | `!true` |
+| `<` | Less Than | `5 < 5` |
+| `>` | Greater Than | `5 > 5` |
+| `==` | Equal To | `5 == 5` |
+| `!=` | Not Equal To | `5 != 5` |
+
+## Functions
+
+Mana supports first-class functions. This means that functions can be passed as arguments to other functions, returned from functions, and assigned to variables. The following is an example of a function definition in Mana.
+
+Functions are defined using the `fn` keyword. The function name is followed by a list of parameters in parentheses. The function body is enclosed in curly braces. The function body is a `BlockStatement`, which means that it is a list of statements enclosed in curly braces. The last statement in the function body is the `return` statement, which is used to return a value from the function. Functions, themselves, are `ExpressionStatements`, which means that they evaluate to a value. The value that a function evaluates to is the value that is returned from the function.
+
+```rust
+fn add(x, y) {
+    return x + y;
+}
+```
+
+## Conditionals
+
+Mana supports If-Else conditionals. An `IfExpression` in Mana is composed of two parts: the condition and the consequence. The condition is an expression that evaluates to a boolean value. The consequence is a `BlockStatement` that is executed if the condition evaluates to `true`. The consequence is optional. If the condition evaluates to `false` and there is no consequence, then the `IfExpression` evaluates to `null`. If there is a consequence, then the `IfExpression` evaluates to the value of the last statement in the consequence.
+
+```rust
+if (x < y) {
+    x + y;
+} else {
+    x - y;
+}
+```
+
+## Variables
+
+Variables are declared using the `let` keyword. The variable name is followed by an equals sign and an expression. The expression is evaluated and the result is assigned to the variable. 
+
+```rust
+let x = 5;
+```
+
+
+## License
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
