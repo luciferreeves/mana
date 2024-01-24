@@ -87,16 +87,12 @@ Mana supports the following operators:
 | `==` | Equal To | `5 == 5` |
 | `!=` | Not Equal To | `5 != 5` |
 
-## Functions
+## Variables
 
-Mana supports first-class functions. This means that functions can be passed as arguments to other functions, returned from functions, and assigned to variables. The following is an example of a function definition in Mana.
-
-Functions are defined using the `fn` keyword. The function name is followed by a list of parameters in parentheses. The function body is enclosed in curly braces. The function body is a `BlockStatement`, which means that it is a list of statements enclosed in curly braces. The last statement in the function body is the `return` statement, which is used to return a value from the function. Functions, themselves, are `ExpressionStatements`, which means that they evaluate to a value. The value that a function evaluates to is the value that is returned from the function.
+Variables are declared using the `let` keyword. The variable name is followed by an equals sign and an expression. The expression is evaluated and the result is assigned to the variable. 
 
 ```rust
-fn add(x, y) {
-    return x + y;
-}
+let x = 5;
 ```
 
 ## Conditionals
@@ -111,14 +107,17 @@ if (x < y) {
 }
 ```
 
-## Variables
+## Functions
 
-Variables are declared using the `let` keyword. The variable name is followed by an equals sign and an expression. The expression is evaluated and the result is assigned to the variable. 
+Mana supports first-class functions. This means that functions can be passed as arguments to other functions, returned from functions, and assigned to variables. The following is an example of a function definition in Mana.
+
+Functions are defined using the `fn` keyword. The function name is followed by a list of parameters in parentheses. The function body is enclosed in curly braces. The function body is a `BlockStatement`, which means that it is a list of statements enclosed in curly braces. The last statement in the function body is the `return` statement, which is used to return a value from the function. Functions, themselves, are `ExpressionStatements`, which means that they evaluate to a value. The value that a function evaluates to is the value that is returned from the function.
 
 ```rust
-let x = 5;
+fn add(x, y) {
+    return x + y;
+}
 ```
-
 
 ## License
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
