@@ -56,5 +56,9 @@ fn subtract(x, y) {
 }
 
 // this will either add x and y if x is less than y, or return the difference between x and y
-let result = if (x < y) { add(x, y) } else { subtract(x, y) };
+let result = if (x < y) { 
+    add(x, y) 
+} else { 
+    subtract(x, y) 
+}; // result = 15
 ```
