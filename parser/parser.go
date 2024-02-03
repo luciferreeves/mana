@@ -29,6 +29,7 @@ var precedences = map[tokens.TokenType]int{
 	tokens.MINUS:    SUM,
 	tokens.SLASH:    PRODUCT,
 	tokens.ASTERISK: PRODUCT,
+	tokens.LPAREN:   CALL,
 }
 
 type (
@@ -69,6 +70,7 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerPrefix(tokens.FALSE, p.parseBoolean)
 	p.registerPrefix(tokens.IF, p.parseIfExpression)
 	p.registerPrefix(tokens.FUNCTION, p.parseFunctionLiteral)
+	p.registerPrefix(tokens.LPAREN, p.parseGroupedExpression)
 
 	// Initialize the infix parse functions.
 	p.infixParseFns = make(map[tokens.TokenType]infixParseFn)
@@ -80,6 +82,7 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerInfix(tokens.NOT_EQ, p.parseInfixExpression)
 	p.registerInfix(tokens.LT, p.parseInfixExpression)
 	p.registerInfix(tokens.GT, p.parseInfixExpression)
+	p.registerInfix(tokens.LPAREN, p.parseCallExpression)
 
 	return p
 }
@@ -371,6 +374,48 @@ func (p *Parser) parseFunctionParameters() []*ast.Identifier {
 	if !p.expectPeek(tokens.RPAREN) { return nil }
 
 	return identifiers
+}
+
+// parseGroupedExpression parses a grouped expression.
+func (p *Parser) parseGroupedExpression() ast.Expression {
+	p.nextToken()
+
+	exp := p.parseExpression(LOWEST)
+
+	if !p.expectPeek(tokens.RPAREN) { return nil }
+
+	return exp
+}
+
+// parseCallExpression parses a call expression.
+func (p *Parser) parseCallExpression(function ast.Expression) ast.Expression {
+	exp := &ast.CallExpression{Token: p.curToken, Function: function}
+	exp.Arguments = p.parseCallArguments()
+
+	return exp
+}
+
+// parseCallArguments parses call arguments.
+func (p *Parser) parseCallArguments() []ast.Expression {
+	args := []ast.Expression{}
+
+	if p.peekTokenIs(tokens.RPAREN) {
+		p.nextToken()
+		return args
+	}
+
+	p.nextToken()
+	args = append(args, p.parseExpression(LOWEST))
+
+	for p.peekTokenIs(tokens.COMMA) {
+		p.nextToken()
+		p.nextToken()
+		args = append(args, p.parseExpression(LOWEST))
+	}
+
+	if !p.expectPeek(tokens.RPAREN) { return nil }
+
+	return args
 }
 
 // curTokenIs returns true if the current token is of the given type.

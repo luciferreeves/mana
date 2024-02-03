@@ -22,7 +22,7 @@ Mana is a toy programming language written in Go. It is a dynamically typed, int
 | `IfExpression` | ✔️ | If Expressions are used to represent conditional statements | `if (true) { return 5; }` | ✔️ |
 | `BlockStatement` | ✔️ | Block Statements are used to represent blocks of code | `{ let x = 5; return x; }` | ✔️ |
 | `FunctionLiteralExpression` | ✔️ | Function Literal Expressions are used to represent function definitions | `fn(x) { return x; }` | ✔️ |
-| `CallExpression` | NYI | Call Expressions are used to call functions | `add(5, 5)` | NYI |
+| `CallExpression` | ✔️ | Call Expressions are used to call functions | `add(5, 5)` | ✔️ |
 | `StringLiteralExpression` | NYI | String Literal Expressions are used to represent string values | `"Hello, World!"` | NYI |
 | `ArrayLiteralExpression` | NYI | Array Literal Expressions are used to represent array values | `[1, 2, 3]` | NYI |
 | `IndexExpression` | NYI | Index Expressions are used to index into arrays | `myArray[0]` | NYI |
