@@ -5,14 +5,23 @@ import (
 	"fmt"
 	"io"
 	"mana/lexer"
-	"mana/tokens"
+	"mana/parser"
 )
 
 // PROMPT is the prompt for the REPL.
-const PROMPT = "=> "
+const PROMPT = ">>> "
+const MANA_ICON = `
+███╗░░░███╗░█████╗░███╗░░██╗░█████╗░
+████╗░████║██╔══██╗████╗░██║██╔══██╗
+██╔████╔██║███████║██╔██╗██║███████║
+██║╚██╔╝██║██╔══██║██║╚████║██╔══██║
+██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║
+╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝
+`                                                                                
 
 func Start(in io.Reader, out io.Writer) {
 	var scanner *bufio.Scanner = bufio.NewScanner(in)
+	io.WriteString(out, MANA_ICON + "\n")
 
 	for {
 		fmt.Fprint(out, PROMPT)
@@ -24,9 +33,23 @@ func Start(in io.Reader, out io.Writer) {
 
 		var line string = scanner.Text()
 		var l *lexer.Lexer = lexer.New(line)
+		var p *parser.Parser = parser.New(l)
 
-		for tok := l.NextToken(); tok.Type != tokens.EOF; tok = l.NextToken() {
-			fmt.Fprintf(out, "%+v\n", tok)
+		var program = p.ParseProgram()
+
+		if len(p.Errors()) != 0 {
+			printParserErrors(out, p.Errors())
+			continue
 		}
+
+		io.WriteString(out, program.String())
+		io.WriteString(out, "\n")
+	}
+}
+
+func printParserErrors(out io.Writer, errors []string) {
+	io.WriteString(out, "Mana Encountered Parser Errors:\n")
+	for _, msg := range errors {
+		io.WriteString(out, "\t" + msg + "\n")
 	}
 }
