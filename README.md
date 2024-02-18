@@ -32,9 +32,26 @@ Mana is a toy programming language written in Go. It is a dynamically typed, int
 
 ## REPL
 
-Mana will come with a REPL (Read-Eval-Print-Loop) that can be used to evaluate Mana code.
+Mana ships with a Read-Eval-Print-Loop (REPL) that can be used to evaluate Mana code. The REPL can be started by running the `mana` execultable. Note that you will need to [build the project](#building-the-project) before you can run the REPL.
 
-> *Note*: The REPL is still in development and is not yet usable. Currently, it can only parse and print the AST of the input code.
+```bash
+/path/to/mana
+```
+
+Mana will then start the REPL and you can start typing Mana code. The REPL will evaluate the code and print the result.
+
+```text
+Hello <username>! Welcome to Mana REPL!
+
+███╗░░░███╗░█████╗░███╗░░██╗░█████╗░
+████╗░████║██╔══██╗████╗░██║██╔══██╗
+██╔████╔██║███████║██╔██╗██║███████║
+██║╚██╔╝██║██╔══██║██║╚████║██╔══██║
+██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║
+╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝
+
+>>> let x = 5;
+```
 
 ## Syntax
 
@@ -117,29 +134,6 @@ Functions are defined using the `fn` keyword. The function name is followed by a
 fn add(x, y) {
     return x + y;
 }
-```
-
-## REPL
-
-Mana ships with a Read-Eval-Print-Loop (REPL) that can be used to evaluate Mana code. The REPL can be started by running the `mana` execultable. Note that you will need to [build the project](#building-the-project) before you can run the REPL.
-
-```bash
-/path/to/mana
-```
-
-Mana will then start the REPL and you can start typing Mana code. The REPL will evaluate the code and print the result.
-
-```text
-Hello <username>! Welcome to Mana REPL!
-
-███╗░░░███╗░█████╗░███╗░░██╗░█████╗░
-████╗░████║██╔══██╗████╗░██║██╔══██╗
-██╔████╔██║███████║██╔██╗██║███████║
-██║╚██╔╝██║██╔══██║██║╚████║██╔══██║
-██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║
-╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝
-
->>> let x = 5;
 ```
 
 ## Building the Project
