@@ -119,5 +119,64 @@ fn add(x, y) {
 }
 ```
 
+## REPL
+
+Mana ships with a Read-Eval-Print-Loop (REPL) that can be used to evaluate Mana code. The REPL can be started by running the `mana` execultable. Note that you will need to [build the project](#building-the-project) before you can run the REPL.
+
+```bash
+/path/to/mana
+```
+
+Mana will then start the REPL and you can start typing Mana code. The REPL will evaluate the code and print the result.
+
+```text
+Hello <username>! Welcome to Mana REPL!
+
+███╗░░░███╗░█████╗░███╗░░██╗░█████╗░
+████╗░████║██╔══██╗████╗░██║██╔══██╗
+██╔████╔██║███████║██╔██╗██║███████║
+██║╚██╔╝██║██╔══██║██║╚████║██╔══██║
+██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║
+╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝
+
+>>> let x = 5;
+```
+
+## Building the Project
+
+To build the project, you will need to have Go installed on your machine. You can download Go from the [official website](https://golang.org/). Once you have Go installed, you can build the project by running the following command:
+
+```bash
+go build
+```
+
+This will create an executable file named `mana` in the root of the project directory.
+
+## Running the Tests
+
+To run the tests, you can use the `go test` command. This will run all of the tests in the project.
+
+```bash
+go test ./...
+```
+
+Or in a specific package:
+
+```bash
+go test ./lexer
+```
+
+If you want to run a specific test, you can use the `-run` flag to specify a regular expression that matches the test names.
+
+```bash
+go test -run TestLetStatement
+```
+
+Furthermore, you can use the `-v` flag to get verbose output from the tests.
+
+```bash
+go test -v ./...
+```
+
 ## License
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
