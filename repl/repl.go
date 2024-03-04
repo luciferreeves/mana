@@ -7,6 +7,7 @@ import (
 	"mana/lexer"
 	"mana/parser"
 	"mana/evaluator"
+  "mana/object"
 )
 
 // PROMPT is the prompt for the REPL.
@@ -22,6 +23,8 @@ const MANA_START = `
 
 func Start(in io.Reader, out io.Writer) {
 	var scanner *bufio.Scanner = bufio.NewScanner(in)
+  env := object.NewEnvironment()
+
 	io.WriteString(out, MANA_START + "\n")
 
 	for {
@@ -43,7 +46,7 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		evaluated := evaluator.Eval(program)
+		evaluated := evaluator.Eval(program, env)
 		if evaluated != nil {
 			io.WriteString(out, evaluated.Inspect())
 			io.WriteString(out, "\n")
