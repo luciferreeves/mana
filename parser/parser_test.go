@@ -9,10 +9,10 @@ import (
 
 func TestLetStatements(t *testing.T) {
 	tests := []struct {
-		input 			string
+		input              string
 		expectedIdentifier string
-		expectedValue 		interface{}
-	} {
+		expectedValue      interface{}
+	}{
 		{"let x = 5;", "x", 5},
 		{"let y = true;", "y", true},
 		{"let foobar = y;", "foobar", "y"},
@@ -303,9 +303,9 @@ func TestBooleanExpression(t *testing.T) {
 // Prefix expression tests.
 func TestParsingPrefixExpressions(t *testing.T) {
 	var prefixTests = []struct {
-		input        string
-		operator     string
-		value 	  	 interface{}
+		input    string
+		operator string
+		value    interface{}
 	}{
 		{"!5;", "!", 5},
 		{"-15;", "-", 15},
@@ -722,7 +722,7 @@ func TestFunctionParameterParsing(t *testing.T) {
 
 		var program *ast.Program = p.ParseProgram()
 		checkParserErrors(t, p)
-		
+
 		stmt := program.Statements[0].(*ast.ExpressionStatement)
 		function := stmt.Expression.(*ast.FunctionLiteral)
 

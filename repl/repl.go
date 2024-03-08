@@ -4,10 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"mana/lexer"
-	"mana/parser"
 	"mana/evaluator"
-  "mana/object"
+	"mana/lexer"
+	"mana/object"
+	"mana/parser"
 )
 
 // PROMPT is the prompt for the REPL.
@@ -19,13 +19,13 @@ const MANA_START = `
 ██║╚██╔╝██║██╔══██║██║╚████║██╔══██║
 ██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║
 ╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝
-`                                                                                
+`
 
 func Start(in io.Reader, out io.Writer) {
 	var scanner *bufio.Scanner = bufio.NewScanner(in)
-  env := object.NewEnvironment()
+	env := object.NewEnvironment()
 
-	io.WriteString(out, MANA_START + "\n")
+	io.WriteString(out, MANA_START+"\n")
 
 	for {
 		fmt.Fprint(out, PROMPT)
@@ -57,6 +57,6 @@ func Start(in io.Reader, out io.Writer) {
 func printParserErrors(out io.Writer, errors []string) {
 	io.WriteString(out, "ParseError:\n")
 	for _, msg := range errors {
-		io.WriteString(out, "\t" + msg + "\n")
+		io.WriteString(out, "\t"+msg+"\n")
 	}
 }
